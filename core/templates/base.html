@@ -1,0 +1,73 @@
+<!-- templates/base.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Zomato Clone</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #fff8f0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .navbar {
+      background-color: #e23744;
+    }
+    .navbar-brand, .nav-link {
+      color: #fff !important;
+    }
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+    .container {
+      margin-top: 30px;
+    }
+    .btn-danger {
+      background-color: #e23744;
+      border: none;
+    }
+    .btn-danger:hover {
+      background-color: #c02a35;
+    }
+    footer {
+      background: #000;
+      color: #fff;
+    }
+  </style>
+  {% block extra_style %}{% endblock %}
+</head>
+
+<!-- ✅ Flex container for sticky footer -->
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">🍽 Zomato Clone</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+         <li class="nav-item"><a class="nav-link" href="{% url 'restaurant_list' %}">Home</a></li>
+         <li class="nav-item"><a class="nav-link" href="{% url 'register_page' %}">Register</a></li>
+         <li class="nav-item"><a class="nav-link" href="{% url 'login_page' %}">Login</a></li>
+         <li class="nav-item"><a class="nav-link" href="{% url 'my_orders' %}">My Orders</a></li>
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- ✅ Main content grows to push footer down -->
+  <main class="flex-fill container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ✅ Sticky footer -->
+  <footer class="text-center py-3">
+    🍽 Zomato Clone &copy; 2025 | Built by Kiruthiga 🩷✨
+  </footer>
+
+</body>
+</html>

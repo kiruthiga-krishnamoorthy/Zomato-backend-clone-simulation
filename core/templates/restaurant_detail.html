@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block extra_style %}
+  <style>
+    .restaurant-detail {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .menu-section {
+      margin-top: 30px;
+    }
+
+    .menu-item {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item h4 {
+      margin: 0;
+    }
+
+    .menu-item p {
+      margin: 5px 0 0;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #2a9d8f;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="restaurant-detail">
+    <h2>{{ restaurant.name }}</h2>
+    <p>{{ restaurant.description }}</p>
+    <p>📍 Address: {{ restaurant.address }}</p>
+    <p>🍽️ Cuisine: {{ restaurant.cuisine_type }}</p>
+
+  <div class="menu-section">
+  <h3>🍲 Menu Items</h3>
+  {% if restaurant.menu_items.all %}
+    {% for item in restaurant.menu_items.all %}
+      <div class="menu-item">
+        <h4>{{ item.name }}</h4>
+        <p>{{ item.description }}</p>
+        <p class="price">₹{{ item.price }}</p>
+        {% if item.is_veg %}
+          <p>🌱 Vegetarian</p>
+        {% else %}
+          <p>🍗 Non-Vegetarian</p>
+        {% endif %}
+
+        <!-- ✅ Add to Cart Form -->
+        <form method="POST" action="{% url 'add_to_cart' item.id %}">
+          {% csrf_token %}
+          <label for="quantity">Qty:</label>
+          <input type="number" name="quantity" value="1" min="1" required>
+          <button type="submit">Add to Cart 🛒</button>
+        </form>
+
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No menu items available yet.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

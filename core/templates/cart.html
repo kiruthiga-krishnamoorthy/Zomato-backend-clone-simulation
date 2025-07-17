@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block extra_style %}
+  <style>
+    .cart {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .cart-item {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item h4 {
+      margin: 0;
+    }
+
+    .cart-item p {
+      margin: 5px 0 0;
+    }
+
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .cart-actions {
+      margin-top: 10px;
+    }
+
+    .cart-actions form {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="cart">
+    <h2>🛒 Your Cart</h2>
+
+    {% if cart_items %}
+      {% for item in cart_items %}
+        <div class="cart-item">
+          <h4>{{ item.menu_item.name }}</h4>
+          <p>Quantity: {{ item.quantity }}</p>
+          <p>Price: ₹{{ item.menu_item.price }} x {{ item.quantity }} = ₹{{ item.menu_item.price|floatformat:2|floatformat:2 }}</p>
+
+          <div class="cart-actions">
+            <!-- ✅ Update Quantity Form -->
+            <form method="POST" action="{% url 'update_cart' item.id %}">
+              {% csrf_token %}
+              <input type="number" name="quantity" value="{{ item.quantity }}" min="1" required>
+              <button type="submit">Update</button>
+            </form>
+
+            <!-- ✅ Remove Item Form -->
+            <form method="POST" action="{% url 'remove_from_cart' item.id %}">
+              {% csrf_token %}
+              <button type="submit">Remove ❌</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+
+      <div class="total">
+        Total: ₹{{ total_price }}
+      </div>
+
+      <!-- ✅ Place Order Form -->
+      <form method="POST" action="{% url 'place_order' %}">
+        {% csrf_token %}
+        <button type="submit">Place Order ✅</button>
+      </form>
+
+    {% else %}
+      <p>Your cart is empty.</p>
+    {% endif %}
+  </div>
+{% endblock %}

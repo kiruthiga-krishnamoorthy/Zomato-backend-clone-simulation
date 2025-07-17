@@ -1,0 +1,37 @@
+body {
+  background: #fff8f0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar {
+  background-color: #e23744;
+}
+
+.navbar-brand, .nav-link {
+  color: #fff !important;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.container {
+  margin-top: 30px;
+}
+
+.btn-danger {
+  background-color: #e23744;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c02a35;
+}
+
+footer {
+  background: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: 50px;
+}
