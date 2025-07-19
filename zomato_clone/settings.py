@@ -23,9 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-x^+c=qak3n7aj)jcs_d%3&89&74q^&b^@3_7ifnx)!&eu0&8*e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'zomato-backend-clone-simulation.onrender.com',
+    'localhost',
+    '127.0.0.1',
+    
+    ]
+
 
 
 # Application definition
