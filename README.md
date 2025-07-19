@@ -5,7 +5,7 @@ This project is a backend simulation of Zomato built with *Django, **REST APIs, 
 ---
 
 ## 🚀 *Live Demo*
-Check the deployed version here 👉 [Live on Render](https://your-render-link.onrender.com)
+Check the deployed version here 👉 [Live on Render](https://zomato-backend-clone-simulation.onrender.com))
 
 ---
 
